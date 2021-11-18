@@ -1,0 +1,8 @@
+data<-read.csv("music.csv", header = T, fileEncoding = "UTF-8-BOM")
+quantile(data$tempo)
+data$tempo<-ifelse(data$tempo<=99.38401 | data$tempo>=135.99918, 0, data$tempo)
+quantile((data$tempo))
+result<-mean(data$tempo)+sd(data$tempo)
+mean(data$tempo)
+sd(data$tempo)
+print(result)
