@@ -1,0 +1,10 @@
+install.packages("faraway")
+library(faraway)
+data<-orings
+write.csv(data, file = 'orings.csv')
+summary(data)
+str(data)
+library(dplyr)
+data2<-data %>% filter(damage>=1)
+result<-cor(data2$temp, data2$damage, method="pearson")
+print(result)
