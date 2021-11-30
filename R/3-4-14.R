@@ -1,0 +1,16 @@
+str(iris)
+head(iris)
+summary(iris)
+library(rpart)
+rpart.model<-rpart(Species~., data=iris)
+rpart.model
+ls(rpart.model)
+rpart.model$cptable
+tree_pred<-predict(rpart.model, newdata = iris, type='class')
+library(caret)
+confusionMatrix(tree_pred, reference = iris$Species)
+library(e1071)
+svm.model<-svm(Species~., data = iris)
+svm.pred<-predict(svm.model, iris)
+confusionMatrix(svm.pred, reference = iris$Species)
+write.csv(svm.pred, file = "3-4-14.csv")
