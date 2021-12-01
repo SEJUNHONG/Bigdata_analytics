@@ -1,0 +1,8 @@
+library(ISLR)
+library(dplyr)
+summary(Carseats)
+colSums(is.na(Carseats))
+upper<-mean(Carseats$Sales)+1.5*sd(Carseats$Sales)
+lower<-mean(Carseats$Sales)-1.5*sd(Carseats$Sales)
+sd_age<-Carseats %>% filter(Sales<=upper & Sales>=lower) %>% summarise(sd=sd(Age))
+print(sd_age)
