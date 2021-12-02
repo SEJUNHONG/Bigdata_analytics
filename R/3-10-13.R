@@ -1,0 +1,12 @@
+library(mlbench)
+data("PimaIndiansDiabetes2")
+data<-PimaIndiansDiabetes2
+summary(data)
+library(dplyr)
+data2<-data %>% filter(!is.na(glucose) & !is.na(pressure) & !is.na(mass))
+colSums(is.na(data2))
+data2<-data2 %>% mutate(age_grp=ifelse(age>=60, "3", ifelse(age>=41, "2", "1")))
+head(data2)
+sum_data2<-data2 %>% group_by(age_grp) %>% summarise(total_num=n(), diab_num=sum(diabetes=='pos'), ill_rate=diab_num/total_num) %>% arrange(desc(ill_rate))
+result<-head(sum_data2$ill_rate, 1)
+print(result)
